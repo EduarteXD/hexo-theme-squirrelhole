@@ -1,0 +1,56 @@
+.meta {
+  color: rgb(205, 68, 255);
+}
+
+.keyword, .tag, .variable {
+  color: rgb(129, 197, 240);
+}
+
+.attr, .attribute {
+  color: rgb(83, 157, 236);
+}
+
+.class_, .function_, .built_in, .title {
+  color: rgb(245, 202, 83);
+}
+
+.punctuation, .property {
+  color: rgb(252, 247, 134);
+}
+
+.string {
+  color: rgb(255, 121, 80);
+}
+
+.regexp {
+  color: rgb(255, 62, 62);
+}
+
+.number {
+  color: rgb(83, 236, 205);
+}
+
+.literal {
+  color: rgb(144, 88, 255);
+}
+
+.comment {
+  color: rgb(85, 221, 153);
+}
+
+.type {
+  color: rgb(100, 130, 236);
+}
+
+.symbol {
+  color: rgb(160, 240, 129);
+}
+
+.selector-tag, .selector-class, 
+.selector-id, .selector-attr {
+  color: #f5d167;
+}
+
+.section {
+  color: rgb(126, 246, 168);
+}

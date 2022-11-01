@@ -1,0 +1,12 @@
+doctype 
+html(lang= config.language)
+  head 
+    include head
+
+  body 
+    include navi 
+    .main 
+      block content 
+
+  script(src= url_for('js/main.js'))
+    

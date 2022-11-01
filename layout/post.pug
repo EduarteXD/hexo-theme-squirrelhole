@@ -1,0 +1,41 @@
+extends partial/layout 
+
+include mixins
+
+block site_title 
+  != page.title || `${__('no_title')}`
+
+block description 
+  
+
+block content
+  .squirrelsection(description= page.title || `${__('no_title')}`)
+    .result= 'cat '+ page.source + ' | render'
+    .interact
+      - var prev = page.prev ? page.prev.path : false;
+      - var next = page.next ? page.next.path : false;
+      if prev 
+        a.btn(href= url_for(prev))= `${__('prev_post')}`
+      else 
+        a.btn.disabled= `${__('prev_post')}`
+      if next 
+        a.btn(href= url_for(next))= `${__('next_post')}`
+      else 
+        a.btn.disabled= `${__('next_post')}`
+      a.btn(href= '/')= `${__('back_home')}`
+  include mixins 
+  +make_post(page, false)
+
+  .squirrelsection.end(description= page.title || `${__('no_title')}`)
+    .interact
+      - var prev = page.prev ? page.prev.path : false;
+      - var next = page.next ? page.next.path : false;
+      if prev 
+        a.btn(href= url_for(prev))= `${__('prev_post')}`
+      else 
+        a.btn.disabled= `${__('prev_post')}`
+      if next 
+        a.btn(href= url_for(next))= `${__('next_post')}`
+      else 
+        a.btn.disabled= `${__('next_post')}`      
+      a.btn(href= '/')= `${__('back_home')}`

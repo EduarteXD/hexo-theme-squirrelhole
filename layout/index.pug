@@ -1,0 +1,33 @@
+extends partial/layout 
+block content
+  .squirrelsection(description= `${__('post_list')}`)
+    .result= 'ls _posts | render -s -page ' + page.current
+    .interact
+      - var prev = page.prev_link
+      - var next = page.next_link
+      if page.prev 
+        a.btn(href= url_for(prev))= `${__('prev')}`
+      else 
+        a.btn.disabled= `${__('prev')}`
+      if page.next 
+        a.btn(href= url_for(next))= `${__('next')}`
+      else 
+        a.btn.disabled= `${__('next')}`
+  .post-list
+    - page.posts.each((item) => {
+      include mixins 
+      +make_post(item, true)
+    - })
+
+  .squirrelsection.end(description= `${__('post_list')}`)
+    .interact
+      - var prev = page.prev_link
+      - var next = page.next_link
+      if page.prev 
+        a.btn(href= url_for(prev))= `${__('prev')}`
+      else 
+        a.btn.disabled= `${__('prev')}`
+      if page.next 
+        a.btn(href= url_for(next))= `${__('next')}`
+      else 
+        a.btn.disabled= `${__('next')}`

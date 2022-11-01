@@ -1,0 +1,20 @@
+mixin make_post(item, is_summary)
+  .post.animated 
+    .post-title 
+      h2
+        - var title = item.title || `${__('no_title')}`;
+        if is_summary
+          a(href= url_for(item.path))= title
+        else 
+          a= title
+    if is_summary 
+      span.source= item.source
+    if is_summary
+      .post-content
+        - var summary = item.summary || item.content 
+        p!= truncate(strip_html(summary), { length: 160 })
+    else 
+      .post-content!= item.content 
+    .post-footer: .meta 
+      .info
+        span.date= "date: "+date(item.date, 'YYYY-MM-DD')
