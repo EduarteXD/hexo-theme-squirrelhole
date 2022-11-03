@@ -33,7 +33,11 @@
   font-family: "Dev Icon";
   src: url(/webfonts/devicon.ttf);
 }
-/* color scheme */
+@font-face {
+  font-family: Monaco;
+  src: url(/webfonts/Monaco.ttf);
+}
+/* import color schemes */
 :root {
   --main-console: #fff;
   --main-console-secondary: #ddd;
@@ -44,8 +48,10 @@
   --main-link-secondary: rgb(97, 194, 255);
   --main-bg: #fff;
   --main-content: #000000e0;
-  --main-content-secondary: #000000d0;
-  --main-tagged: #ccc;
+  --main-content-secondary: #6b6b6bd0;
+  --main-tagged: rgb(255, 247, 223);
+  --main-hover: #cccccc33;
+  --main-shadow: #acacacae;
   --main-scrollbar: #00000044;
   --main-scrollbar-bg: transparent;
   --hlt-bg: rgb(73, 73, 73);
@@ -66,15 +72,24 @@
   --main-content-secondary: #ffffffd0;
 }
 
-/* universal  */
+/* import basic styles */
 body {
   font-family: "Comic Neue", "Mu Yu", "Xiao Lang Man";
   font-size: 18px;
   width: 70vw;
   min-width: 350px;
+  min-height: calc(100vh - 40px);
   margin: 20px auto;
   background-color: var(--main-bg);
   color: var(--main-content);
+}
+
+hr {
+  color: transparent;
+  border: none;
+  background-color: var(--main-content-secondary);
+  opacity: 0.7;
+  height: 2px;
 }
 
 a {
@@ -82,12 +97,72 @@ a {
   transition: all 0.2s;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
 }
 a:hover {
   color: var(--main-link-secondary);
 }
 
-/* casecade */
+blockquote {
+  position: relative;
+  width: fit-content;
+  margin: 30px 40px;
+}
+blockquote.pullquote {
+  margin: 20px 40px;
+  font-weight: bold;
+}
+blockquote.pullquote.left {
+  float: left;
+}
+blockquote.pullquote.right {
+  float: right;
+}
+blockquote::before {
+  content: "「";
+  font-weight: normal;
+  opacity: 0.3;
+  position: absolute;
+  transform: scale(5);
+  top: 15px;
+  left: -50px;
+  color: var(--main-content-secondary);
+}
+blockquote::after {
+  content: "」";
+  font-weight: normal;
+  opacity: 0.3;
+  position: absolute;
+  transform: scale(5);
+  bottom: 15px;
+  right: -40px;
+  color: var(--main-content-secondary);
+}
+blockquote footer {
+  opacity: 0.6;
+}
+
+ul {
+  margin-left: 20px;
+}
+ul ::marker {
+  font-family: monospace;
+  font-size: 14px;
+  content: "[#]>_ ";
+}
+
+ol {
+  margin-left: 20px;
+}
+ol ::marker {
+  font-family: monospace;
+  font-size: 14px;
+  content: "[" counter(list-item) "]>  ";
+}
+ol :last-child::marker {
+  content: "[" counter(list-item) "]>_ ";
+}
+
 .squirrelsection {
   color: var(--main-console);
   background-color: var(--main-console-bg);
@@ -153,34 +228,70 @@ a:hover {
 
 .post-content a::before {
   content: "[\f0c1] ";
-  font-family: "Font Awesome";
+  font-family: Monaco, "Font Awesome";
   font-style: normal;
   font-size: 12px;
 }
+.post-content a:hover::after {
+  content: "[\f0c1] " attr(href);
+  font-family: Monaco, "Font Awesome";
+  font-size: 14px;
+  position: absolute;
+  padding: 5px;
+  bottom: 25px;
+  width: fit-content;
+  white-space: nowrap;
+  left: 0;
+  background-color: var(--main-tagged);
+  color: var(--main-link);
+}
 
-.post-list .post-title {
+.post-list .post {
+  transition: all 0.2s;
+  position: relative;
+  padding: 10px;
+}
+.post-list .post:hover {
+  background-color: var(--main-hover);
+}
+.post-list .post:hover::before {
+  content: "";
+  background-color: var(--main-console-bg);
+  opacity: 0.1;
+  height: 100%;
+  width: 5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.post-list .post:hover .post-content::before {
+  opacity: 0;
+  transform: translate(-10px, -25%) scaleY(1.5);
+}
+.post-list .post .post-title {
   margin: 18px 0 0 0;
 }
-.post-list .post-title::before {
+.post-list .post .post-title::before {
   color: var(--main-content-secondary);
   content: "{ Title: ";
   font-size: 12px;
 }
-.post-list .post-title h2 {
+.post-list .post .post-title h2 {
   display: inline;
 }
-.post-list .post-title::after {
+.post-list .post .post-title::after {
   color: var(--main-content-secondary);
   content: ",";
   margin-left: 3px;
   font-size: 12px;
 }
-.post-list .post-content {
+.post-list .post .post-content {
   position: relative;
   margin-left: 20px;
 }
-.post-list .post-content::before {
+.post-list .post .post-content::before {
   content: "";
+  transition: all 0.2s;
   background-color: var(--main-console-bg);
   opacity: 0.5;
   height: 100%;
@@ -188,11 +299,11 @@ a:hover {
   position: absolute;
   left: -20px;
 }
-.post-list .post-footer .info .date::before {
+.post-list .post .post-footer .info .date::before {
   content: "{ date: ";
   font-size: 12px;
 }
-.post-list .post-footer .info .date::after {
+.post-list .post .post-footer .info .date::after {
   content: " }";
   font-size: 12px;
 }
@@ -212,16 +323,19 @@ a:hover {
 .highlight {
   background-color: var(--hlt-bg);
   color: var(--hlt-plain);
+  font-size: 16px;
   padding: 5px 20px;
   border-radius: 2px;
   margin: 18px 10px;
   position: relative;
+  box-shadow: 5px 5px 10px var(--main-shadow);
 }
 .highlight figcaption {
   position: absolute;
   top: 0;
   left: 0;
   font-size: 16px;
+  color: var(--hlt-bg);
 }
 .highlight .container {
   position: relative;
@@ -234,6 +348,9 @@ a:hover {
 .highlight .line {
   padding: 2px;
   display: block;
+  width: fit-content;
+  font-family: Monaco;
+  transform: scaleY(0.95);
 }
 .highlight .line.marked {
   background-color: var(--hlt-marked);
@@ -258,6 +375,8 @@ a:hover {
   background-color: var(--hlt-lang-indicator-bg);
   color: var(--hlt-lang-indicator);
   font-size: 16px;
+  min-width: 20px;
+  text-align: center;
 }
 .highlight.rust::after {
   content: "\e07a";
@@ -340,8 +459,26 @@ a:hover {
 .highlight .gutter {
   display: none;
 }
+.highlight .link {
+  position: relative;
+}
+.highlight .link:hover {
+  text-decoration: underline;
+}
+.highlight .link:hover::before {
+  content: "⌘[\f17a:Ctrl]+单击打开链接";
+  font-family: Monaco, "Font Awesome Brands";
+  transform: scaleY(1);
+  font-size: 14px;
+  position: absolute;
+  padding: 5px;
+  top: -40px;
+  background-color: var(--hlt-bg);
+  border: 1px solid var(--hlt-header-bg);
+  color: var(--hlt-plain);
+}
 .highlight .meta {
-  color: rgb(205, 68, 255);
+  color: rgb(237, 160, 160);
 }
 .highlight .keyword, .highlight .tag, .highlight .variable {
   color: rgb(129, 197, 240);
@@ -382,6 +519,14 @@ a:hover {
 }
 .highlight .section {
   color: rgb(126, 246, 168);
+}
+.highlight .link {
+  color: rgb(99, 195, 255);
+}
+
+.cmdMode .highlight .link {
+  cursor: pointer;
+  user-select: none;
 }
 
 /* mac like scrollbar */

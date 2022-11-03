@@ -1,0 +1,434 @@
+body {
+  font-family: "Comic Neue", "Mu Yu", "Xiao Lang Man";
+  font-size: 18px;
+  width: 70vw;
+  min-width: 350px;
+  min-height: calc(100vh - 40px);
+  margin: 20px auto;
+  background-color: var(--main-bg);
+  color: var(--main-content);
+}
+
+hr {
+  color: transparent;
+  border: none;
+  background-color: var(--main-content-secondary);
+  opacity: .7;
+  height: 2px;
+}
+
+a {
+  color: var(--main-link);
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+
+  &:hover {
+    color: var(--main-link-secondary);
+  }
+}
+
+blockquote {
+  position: relative;
+  width: fit-content;
+  margin: 30px 40px;
+
+  &.pullquote {
+    margin: 20px 40px;
+    font-weight: bold;
+
+    &.left {
+      float: left;
+    }
+
+    &.right {
+      float: right;
+    }
+  }
+
+  &::before {
+    content: "「";
+    font-weight: normal;
+    opacity: .3;
+    position: absolute;
+    transform: scale(5);
+    top: 15px;
+    left: -50px;
+    color: var(--main-content-secondary);
+  }
+
+  &::after {
+    content: "」";
+    font-weight: normal;
+    opacity: .3;
+    position: absolute;
+    transform: scale(5);
+    bottom: 15px;
+    right: -40px;
+    color: var(--main-content-secondary);
+  }
+
+  footer {
+    opacity: .6;
+  }
+}
+
+ul {
+  margin-left: 20px;
+
+  ::marker {
+    font-family: monospace;
+    font-size: 14px;
+    content: "[#]>_ ";
+  }
+}
+
+ol {
+  margin-left: 20px;
+
+  ::marker {
+    font-family: monospace;
+    font-size: 14px;
+    content: "[" counter(list-item)"]>  ";
+  }
+
+  :last-child::marker {
+    content: "[" counter(list-item)"]>_ ";
+  }
+}
+
+.squirrelsection {
+  color: var(--main-console);
+  background-color: var(--main-console-bg);
+  position: relative;
+  padding: 10px;
+  font-size: 18px;
+  line-height: 24px;
+  vertical-align: middle;
+  font-weight: bold;
+  user-select: none;
+  margin: 20px 0;
+
+  &.end {
+    &::before {
+      content: '# End render "' attr(description)'"';
+      font-family: "Comic Neue";
+      display: block;
+      color: var(--main-console-comments);
+    }
+  }
+
+  &::before {
+    content: '# Render "' attr(description)'"';
+    font-family: "Comic Neue";
+    display: block;
+    color: var(--main-console-comments);
+  }
+
+  .interact::before {
+    content: "❯ ";
+    color: var(--main-console-indicator);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-name: fadeInDown;
+}
+
+.btn {
+  text-decoration: none;
+  border: 1px solid var(--main-console);
+  margin: 2px 5px;
+  padding: 3px;
+  font-size: 12px;
+  font-family: "Comic Neue";
+  color: var(--main-console);
+
+  &:hover {
+    color: var(--main-console-secondary);
+    text-decoration: none;
+  }
+
+  &.disabled {
+    border: none;
+    color: var(--main-console-secondary);
+    cursor: not-allowed;
+  }
+}
+
+.post-content {
+  a {
+    &::before {
+      content: "[\f0c1] ";
+      font-family: Monaco, "Font Awesome";
+      font-style: normal;
+      font-size: 12px;
+    }
+
+    &:hover::after {
+      content: "[\f0c1] "attr(href);
+      font-family: Monaco, "Font Awesome";
+      font-size: 14px;
+      position: absolute;
+      padding: 5px;
+      bottom: 25px;
+      width: fit-content;
+      white-space: nowrap;
+      left: 0;
+      background-color: var(--main-tagged);
+      color: var(--main-link);
+    }
+  }
+}
+
+.post-list {
+  .post {
+    transition: all 0.2s;
+    position: relative;
+    padding: 10px;
+
+    &:hover {
+      background-color: var(--main-hover);
+
+      &::before {
+        content: "";
+        background-color: var(--main-console-bg);
+        opacity: .1;
+        height: 100%;
+        width: 5px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .post-content {
+        &::before {
+          opacity: 0;
+          transform: translate(-10px, -25%) scaleY(1.5);
+        }
+      }
+    }
+
+    .post-title {
+      margin: 18px 0 0 0;
+
+      &::before {
+        color: var(--main-content-secondary);
+        content: "{ Title: ";
+        font-size: 12px;
+      }
+
+      h2 {
+        display: inline;
+      }
+
+      &::after {
+        color: var(--main-content-secondary);
+        content: ",";
+        margin-left: 3px;
+        font-size: 12px;
+      }
+    }
+
+    .post-content {
+      position: relative;
+      margin-left: 20px;
+
+      &::before {
+        content: "";
+        transition: all 0.2s;
+        background-color: var(--main-console-bg);
+        opacity: .5;
+        height: 100%;
+        width: 5px;
+        position: absolute;
+        left: -20px;
+      }
+    }
+
+    .post-footer {
+      .info {
+        .date {
+          &::before {
+            content: "{ date: ";
+            font-size: 12px;
+          }
+
+          &::after {
+            content: " }";
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.source {
+  &::before {
+    color: var(--main-content-secondary);
+    content: "Source: ";
+    margin-left: 8px;
+    font-size: 12px;
+  }
+
+  &::after {
+    color: var(--main-content-secondary);
+    content: " }";
+    font-size: 12px;
+  }
+}
+
+.highlight {
+  background-color: var(--hlt-bg);
+  color: var(--hlt-plain);
+  font-size: 16px;
+  padding: 5px 20px;
+  border-radius: 2px;
+  margin: 18px 10px;
+  position: relative;
+  box-shadow: 5px 5px 10px var(--main-shadow);
+
+  figcaption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 16px;
+    color: var(--hlt-bg);
+  }
+
+  .container {
+    position: relative;
+    overflow: scroll;
+    padding-top: 15px;
+  }
+
+  br {
+    display: none;
+  }
+
+  .line {
+    padding: 2px;
+    display: block;
+    width: fit-content;
+    font-family: Monaco;
+    transform: scaleY(.95);
+
+    &.marked {
+      background-color: var(--hlt-marked);
+    }
+  }
+
+  &::before {
+    content: "";
+    height: 14px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px 0;
+    background-color: var(--hlt-header-bg);
+  }
+
+  $support-langs: (
+    rust: "\e07a",
+    json: "Json",
+    python: "\f3e2",
+    html: "\f13b",
+    javascript: "\f3b8",
+    js: "\f3b8",
+    typescript: "\e9fb",
+    ts: "\e9fb",
+    cpp: "\e635",
+    c: "C",
+    cs: "\e637",
+    sql: "\eb61",
+    objectivec: "\e982",
+    java: "\f4e4",
+    swift: "\f8e1",
+    css: "\f13c",
+    ruby: "\ebca",
+    makefile: "\ea2a",
+    go: "\e40f",
+    bash: "\e979",
+    ini: "INI",
+    markdown: "\f60f",
+    php: "\eb71",
+    perl: "\e9b3",
+    latex: "\ea56",
+    plaintext: "Plain Text"
+  );
+
+&::after {
+  content: "\f121";
+  font-family: "Comic Neue", "Font Awesome Brands", "Dev Icon", "Font Awesome";
+  position: absolute;
+  top: 0;
+  right: 5px;
+  padding: 8px;
+  background-color: var(--hlt-lang-indicator-bg);
+  color: var(--hlt-lang-indicator);
+  font-size: 16px;
+  min-width: 20px;
+  text-align: center;
+}
+
+@each $key,
+$val in $support-langs {
+  &.#{$key} {
+    &::after {
+      content: $val;
+    }
+  }
+}
+
+.gutter {
+  display: none;
+}
+
+.link {
+  position: relative;
+
+  &:hover {
+    text-decoration: underline;
+
+    &::before {
+      content: "⌘[\f17a:Ctrl]+单击打开链接";
+      font-family: Monaco, "Font Awesome Brands";
+      transform: scaleY(1);
+      font-size: 14px;
+      position: absolute;
+      padding: 5px;
+      top: -40px;
+      background-color: var(--hlt-bg);
+      border: 1px solid var(--hlt-header-bg);
+      color: var(--hlt-plain);
+    }
+  }
+}
+
+@import 'highlight_colors.scss';
+}
+
+.cmdMode {
+  .highlight {
+    .link {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}
