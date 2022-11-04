@@ -17,4 +17,7 @@ mixin make_post(item, is_summary)
       .post-content!= item.content 
     .post-footer: .meta 
       .info
-        span.date= "date: "+date(item.date, 'YYYY-MM-DD')
+        if is_summary 
+          span.date= date(item.date, 'YYYY-MM-DD')
+        else 
+          span.date= "date: "+date(item.date, 'YYYY-MM-DD')

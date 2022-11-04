@@ -1,0 +1,556 @@
+@charset "UTF-8";
+/* import fonts */
+@font-face {
+  font-family: "Comic Neue";
+  src: url(/webfonts/ComicNeue-Regular.ttf);
+}
+@font-face {
+  font-family: "Comic Neue";
+  src: url(/webfonts/ComicNeue-Bold.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Font Awesome Light";
+  src: url(/webfonts/fa-regular-400.ttf);
+}
+@font-face {
+  font-family: "Font Awesome";
+  src: url(/webfonts/fa-solid-900.ttf);
+}
+@font-face {
+  font-family: "Font Awesome Brands";
+  src: url(/webfonts/fa-brands-400.ttf);
+}
+@font-face {
+  font-family: "Mu Yu";
+  src: url(/webfonts/MuYuShiDeYi-2.ttf);
+}
+@font-face {
+  font-family: "Xiao Lang Man";
+  src: url(/webfonts/XiaoLangMan.ttf);
+}
+@font-face {
+  font-family: "Dev Icon";
+  src: url(/webfonts/devicon.ttf);
+}
+@font-face {
+  font-family: Monaco;
+  src: url(/webfonts/Monaco.ttf);
+}
+/* import color schemes */
+:root {
+  --main-console: #fff;
+  --main-console-secondary: #ddd;
+  --main-console-bg: rgb(44, 44, 44);
+  --main-console-indicator: #55dd55;
+  --main-console-comments: #55dd99;
+  --main-link: rgb(16, 163, 255);
+  --main-link-secondary: rgb(97, 194, 255);
+  --main-bg: #fff;
+  --main-content: #000000e0;
+  --main-content-secondary: #6b6b6bd0;
+  --main-tagged: rgb(255, 247, 223);
+  --main-hover: #cccccc33;
+  --main-shadow: #acacacae;
+  --main-scrollbar: #00000044;
+  --main-scrollbar-bg: transparent;
+  --hlt-bg: rgb(73, 73, 73);
+  --hlt-plain: #fff;
+  --hlt-marked: rgba(253, 179, 105, 0.182);
+  --hlt-lang-indicator: var(--hlt-bg);
+  --hlt-lang-indicator-bg: #fff;
+  --hlt-header-bg: #ccc;
+}
+
+#dark-mode {
+  --main-console: #fff;
+  --main-console-bg: #666;
+  --main-link: rgb(12, 111, 173);
+  --main-link-secondary: rgb(82, 153, 198);
+  --main-bg: #1b1b1b;
+  --main-content: #ffffffe0;
+  --main-content-secondary: #ffffffd0;
+}
+
+/* import basic styles */
+body {
+  font-family: "Comic Neue", "Mu Yu", "Xiao Lang Man";
+  font-size: 18px;
+  width: 70vw;
+  min-width: 350px;
+  min-height: calc(100vh - 40px);
+  margin: 20px auto;
+  background-color: var(--main-bg);
+  color: var(--main-content);
+}
+
+hr {
+  color: transparent;
+  border: none;
+  background-color: var(--main-content-secondary);
+  opacity: 0.7;
+  height: 2px;
+}
+
+a {
+  color: var(--main-link);
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+}
+a:hover {
+  color: var(--main-link-secondary);
+}
+
+blockquote {
+  position: relative;
+  width: fit-content;
+  margin: 30px 40px;
+}
+blockquote.pullquote {
+  margin: 20px 40px;
+  font-weight: bold;
+}
+blockquote.pullquote.left {
+  float: left;
+}
+blockquote.pullquote.right {
+  float: right;
+}
+blockquote::before {
+  content: "「";
+  font-weight: normal;
+  opacity: 0.3;
+  position: absolute;
+  transform: scale(5);
+  top: 15px;
+  left: -50px;
+  color: var(--main-content-secondary);
+}
+blockquote::after {
+  content: "」";
+  font-weight: normal;
+  opacity: 0.3;
+  position: absolute;
+  transform: scale(5);
+  bottom: 15px;
+  right: -40px;
+  color: var(--main-content-secondary);
+}
+blockquote footer {
+  opacity: 0.6;
+}
+
+ul {
+  margin-left: 20px;
+}
+ul ::marker {
+  font-family: monospace;
+  font-size: 14px;
+  content: "[#]>_ ";
+}
+
+ol {
+  margin-left: 20px;
+}
+ol ::marker {
+  font-family: monospace;
+  font-size: 14px;
+  content: "[" counter(list-item) "]>  ";
+}
+ol :last-child::marker {
+  content: "[" counter(list-item) "]>_ ";
+}
+
+.squirrelsection {
+  color: var(--main-console);
+  background-color: var(--main-console-bg);
+  position: relative;
+  padding: 10px;
+  font-size: 18px;
+  line-height: 24px;
+  vertical-align: middle;
+  font-weight: bold;
+  user-select: none;
+  margin: 20px 0;
+}
+.squirrelsection.end::before {
+  content: '# End render "' attr(description) '"';
+  font-family: "Comic Neue";
+  display: block;
+  color: var(--main-console-comments);
+}
+.squirrelsection::before {
+  content: '# Render "' attr(description) '"';
+  font-family: "Comic Neue";
+  display: block;
+  color: var(--main-console-comments);
+}
+.squirrelsection .interact::before {
+  content: "❯ ";
+  color: var(--main-console-indicator);
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animated {
+  animation-duration: 1s;
+  animation-name: fadeInDown;
+}
+
+.btn {
+  text-decoration: none;
+  border: 1px solid var(--main-console);
+  margin: 2px 5px;
+  padding: 3px;
+  font-size: 12px;
+  font-family: "Comic Neue";
+  color: var(--main-console);
+}
+.btn:hover {
+  color: var(--main-console-secondary);
+  text-decoration: none;
+}
+.btn.disabled {
+  border: none;
+  color: var(--main-console-secondary);
+  cursor: not-allowed;
+}
+
+.post-content a::before {
+  content: "[\f0c1] ";
+  font-family: Monaco, "Font Awesome";
+  font-style: normal;
+  font-size: 12px;
+}
+.post-content a:hover::after {
+  content: "[\f0c1] " attr(href);
+  font-family: Monaco, "Font Awesome";
+  font-size: 14px;
+  position: absolute;
+  padding: 5px;
+  bottom: 25px;
+  width: fit-content;
+  white-space: nowrap;
+  left: 0;
+  background-color: var(--main-tagged);
+  color: var(--main-link);
+}
+
+.post-list .post {
+  transition: all 0.2s;
+  position: relative;
+  padding: 10px;
+}
+.post-list .post:hover {
+  background-color: var(--main-hover);
+}
+.post-list .post:hover::before {
+  content: "";
+  background-color: var(--main-console-bg);
+  opacity: 0.1;
+  height: 100%;
+  width: 5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.post-list .post:hover .post-content::before {
+  opacity: 0;
+  transform: translate(-10px, -25%) scaleY(1.5);
+}
+.post-list .post .post-title {
+  margin: 18px 0 0 0;
+}
+.post-list .post .post-title::before {
+  color: var(--main-content-secondary);
+  content: "{ Title: ";
+  font-size: 12px;
+}
+.post-list .post .post-title h2 {
+  display: inline;
+}
+.post-list .post .post-title::after {
+  color: var(--main-content-secondary);
+  content: ",";
+  margin-left: 3px;
+  font-size: 12px;
+}
+.post-list .post .post-content {
+  position: relative;
+  margin-left: 20px;
+}
+.post-list .post .post-content::before {
+  content: "";
+  transition: all 0.2s;
+  background-color: var(--main-console-bg);
+  opacity: 0.5;
+  height: 100%;
+  width: 5px;
+  position: absolute;
+  left: -20px;
+}
+.post-list .post .post-footer .info .date::before {
+  content: "{ date: ";
+  font-size: 12px;
+}
+.post-list .post .post-footer .info .date::after {
+  content: " }";
+  font-size: 12px;
+}
+
+.source::before {
+  color: var(--main-content-secondary);
+  content: "Source: ";
+  margin-left: 8px;
+  font-size: 12px;
+}
+.source::after {
+  color: var(--main-content-secondary);
+  content: " }";
+  font-size: 12px;
+}
+
+.highlight {
+  background-color: var(--hlt-bg);
+  color: var(--hlt-plain);
+  font-size: 16px;
+  padding: 5px 20px;
+  border-radius: 2px;
+  margin: 18px 10px;
+  position: relative;
+  box-shadow: 5px 5px 10px var(--main-shadow);
+}
+.highlight figcaption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  color: var(--hlt-bg);
+}
+.highlight .container {
+  position: relative;
+  overflow: scroll;
+  padding-top: 15px;
+}
+.highlight br {
+  display: none;
+}
+.highlight .line {
+  padding: 2px;
+  display: block;
+  width: fit-content;
+  font-family: Monaco;
+  transform: scaleY(0.95);
+}
+.highlight .line.marked {
+  background-color: var(--hlt-marked);
+}
+.highlight::before {
+  content: "";
+  height: 14px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 8px 0;
+  background-color: var(--hlt-header-bg);
+}
+.highlight::after {
+  content: "\f121";
+  font-family: "Comic Neue", "Font Awesome Brands", "Dev Icon", "Font Awesome";
+  position: absolute;
+  top: 0;
+  right: 5px;
+  padding: 8px;
+  background-color: var(--hlt-lang-indicator-bg);
+  color: var(--hlt-lang-indicator);
+  font-size: 16px;
+  min-width: 20px;
+  text-align: center;
+}
+.highlight.rust::after {
+  content: "\e07a";
+}
+.highlight.json::after {
+  content: "Json";
+}
+.highlight.python::after {
+  content: "\f3e2";
+}
+.highlight.html::after {
+  content: "\f13b";
+}
+.highlight.javascript::after {
+  content: "\f3b8";
+}
+.highlight.js::after {
+  content: "\f3b8";
+}
+.highlight.typescript::after {
+  content: "\e9fb";
+}
+.highlight.ts::after {
+  content: "\e9fb";
+}
+.highlight.cpp::after {
+  content: "\e635";
+}
+.highlight.c::after {
+  content: "C";
+}
+.highlight.cs::after {
+  content: "\e637";
+}
+.highlight.sql::after {
+  content: "\eb61";
+}
+.highlight.objectivec::after {
+  content: "\e982";
+}
+.highlight.java::after {
+  content: "\f4e4";
+}
+.highlight.swift::after {
+  content: "\f8e1";
+}
+.highlight.css::after {
+  content: "\f13c";
+}
+.highlight.ruby::after {
+  content: "\ebca";
+}
+.highlight.makefile::after {
+  content: "\ea2a";
+}
+.highlight.go::after {
+  content: "\e40f";
+}
+.highlight.bash::after {
+  content: "\e979";
+}
+.highlight.ini::after {
+  content: "INI";
+}
+.highlight.markdown::after {
+  content: "\f60f";
+}
+.highlight.php::after {
+  content: "\eb71";
+}
+.highlight.perl::after {
+  content: "\e9b3";
+}
+.highlight.latex::after {
+  content: "\ea56";
+}
+.highlight.plaintext::after {
+  content: "Plain Text";
+}
+.highlight .gutter {
+  display: none;
+}
+.highlight .link {
+  position: relative;
+}
+.highlight .link:hover {
+  text-decoration: underline;
+}
+.highlight .link:hover::before {
+  content: "⌘[\f17a:Ctrl]+单击打开链接";
+  font-family: Monaco, "Font Awesome Brands";
+  transform: scaleY(1);
+  font-size: 14px;
+  position: absolute;
+  padding: 5px;
+  top: -40px;
+  background-color: var(--hlt-bg);
+  border: 1px solid var(--hlt-header-bg);
+  color: var(--hlt-plain);
+}
+.highlight .meta {
+  color: rgb(237, 160, 160);
+}
+.highlight .keyword, .highlight .tag, .highlight .variable {
+  color: rgb(129, 197, 240);
+}
+.highlight .attr, .highlight .attribute {
+  color: rgb(83, 157, 236);
+}
+.highlight .class_, .highlight .function_, .highlight .built_in, .highlight .title {
+  color: rgb(245, 202, 83);
+}
+.highlight .punctuation, .highlight .property {
+  color: rgb(252, 247, 134);
+}
+.highlight .string {
+  color: rgb(255, 121, 80);
+}
+.highlight .regexp {
+  color: rgb(255, 62, 62);
+}
+.highlight .number {
+  color: rgb(83, 236, 205);
+}
+.highlight .literal {
+  color: rgb(144, 88, 255);
+}
+.highlight .comment {
+  color: rgb(85, 221, 153);
+}
+.highlight .type {
+  color: rgb(100, 130, 236);
+}
+.highlight .symbol {
+  color: rgb(160, 240, 129);
+}
+.highlight .selector-tag, .highlight .selector-class,
+.highlight .selector-id, .highlight .selector-attr {
+  color: #f5d167;
+}
+.highlight .section {
+  color: rgb(126, 246, 168);
+}
+.highlight .link {
+  color: rgb(99, 195, 255);
+}
+
+.cmdMode .highlight .link {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* mac like scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: var(--main-scrollbar);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 1em;
+  background-color: var(--main-scrollbar-bg);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */

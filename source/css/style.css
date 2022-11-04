@@ -46,7 +46,7 @@
   --main-console-comments: #55dd99;
   --main-link: rgb(16, 163, 255);
   --main-link-secondary: rgb(97, 194, 255);
-  --main-bg: #fff;
+  --main-bg: rgb(255, 255, 255);
   --main-content: #000000e0;
   --main-content-secondary: #6b6b6bd0;
   --main-tagged: rgb(255, 247, 223);
@@ -54,12 +54,12 @@
   --main-shadow: #acacacae;
   --main-scrollbar: #00000044;
   --main-scrollbar-bg: transparent;
-  --hlt-bg: rgb(73, 73, 73);
+  --hlt-bg: rgb(115, 111, 103);
   --hlt-plain: #fff;
   --hlt-marked: rgba(253, 179, 105, 0.182);
   --hlt-lang-indicator: var(--hlt-bg);
   --hlt-lang-indicator-bg: #fff;
-  --hlt-header-bg: #ccc;
+  --hlt-header-bg: rgb(216, 216, 216);
 }
 
 #dark-mode {
@@ -329,6 +329,8 @@ ol :last-child::marker {
   margin: 18px 10px;
   position: relative;
   box-shadow: 5px 5px 10px var(--main-shadow);
+  width: 70%;
+  margin: 40px auto;
 }
 .highlight figcaption {
   position: absolute;
@@ -370,7 +372,7 @@ ol :last-child::marker {
   font-family: "Comic Neue", "Font Awesome Brands", "Dev Icon", "Font Awesome";
   position: absolute;
   top: 0;
-  right: 5px;
+  right: 10px;
   padding: 8px;
   background-color: var(--hlt-lang-indicator-bg);
   color: var(--hlt-lang-indicator);
@@ -487,10 +489,10 @@ ol :last-child::marker {
   color: rgb(83, 157, 236);
 }
 .highlight .class_, .highlight .function_, .highlight .built_in, .highlight .title {
-  color: rgb(245, 202, 83);
+  color: rgb(224, 252, 63);
 }
 .highlight .punctuation, .highlight .property {
-  color: rgb(252, 247, 134);
+  color: rgb(255, 248, 107);
 }
 .highlight .string {
   color: rgb(255, 121, 80);

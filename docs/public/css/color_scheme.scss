@@ -1,0 +1,39 @@
+:root {
+  --main-console: #fff;
+  --main-console-secondary: #ddd;
+  --main-console-bg: rgb(44, 44, 44);
+  --main-console-indicator: #55dd55;
+  --main-console-comments: #55dd99;
+
+  --main-link: rgb(16, 163, 255);
+  --main-link-secondary: rgb(97, 194, 255);
+
+  --main-bg: #fff;
+  --main-content: #000000e0;
+  --main-content-secondary: #6b6b6bd0;
+  --main-tagged: rgb(255, 247, 223);
+  --main-hover: #cccccc33;
+  --main-shadow: #acacacae;
+
+  --main-scrollbar: #00000044;
+	--main-scrollbar-bg: transparent;
+
+  --hlt-bg: rgb(73, 73, 73);
+  --hlt-plain: #fff;
+  --hlt-marked: rgba(253, 179, 105, 0.182);
+  --hlt-lang-indicator: var(--hlt-bg);
+  --hlt-lang-indicator-bg: #fff;
+  --hlt-header-bg: #ccc;
+}
+
+#dark-mode {
+  --main-console: #fff;
+  --main-console-bg: #666;
+
+  --main-link: rgb(12, 111, 173);
+  --main-link-secondary: rgb(82, 153, 198);
+
+  --main-bg: #1b1b1b;
+  --main-content: #ffffffe0;
+  --main-content-secondary: #ffffffd0;
+}

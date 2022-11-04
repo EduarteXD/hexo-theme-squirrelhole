@@ -302,6 +302,8 @@ ol {
   margin: 18px 10px;
   position: relative;
   box-shadow: 5px 5px 10px var(--main-shadow);
+  width: 70%;
+  margin: 40px auto;
 
   figcaption {
     position: absolute;
@@ -378,7 +380,7 @@ ol {
   font-family: "Comic Neue", "Font Awesome Brands", "Dev Icon", "Font Awesome";
   position: absolute;
   top: 0;
-  right: 5px;
+  right: 10px;
   padding: 8px;
   background-color: var(--hlt-lang-indicator-bg);
   color: var(--hlt-lang-indicator);
